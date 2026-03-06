@@ -1,4 +1,15 @@
 {
+  "/_not-found": "app/_not-found.js",
+  "/api/trpc/[trpc]/route": "app/api/trpc/[trpc]/route.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/watch/movie/[slug]/page": "app/watch/movie/[slug]/page.js",
+  "/watch/tv/[slug]/page": "app/watch/tv/[slug]/page.js",
   "/(front)/page": "app/(front)/page.js",
-  "/(front)/home/page": "app/(front)/home/page.js"
+  "/(front)/home/page": "app/(front)/home/page.js",
+  "/(front)/movies/page": "app/(front)/movies/page.js",
+  "/(front)/new-and-popular/page": "app/(front)/new-and-popular/page.js",
+  "/(front)/movies/[slug]/page": "app/(front)/movies/[slug]/page.js",
+  "/(front)/search/page": "app/(front)/search/page.js",
+  "/(front)/tv-shows/[slug]/page": "app/(front)/tv-shows/[slug]/page.js",
+  "/(front)/tv-shows/page": "app/(front)/tv-shows/page.js"
 }
