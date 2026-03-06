@@ -1,0 +1,50 @@
+modules = ["nodejs-20", "web"]
+run = "npm run dev"
+
+[nix]
+channel = "stable-24_05"
+
+[deployment]
+run = ["sh", "-c", "npm run dev"]
+
+[[ports]]
+localPort = 5000
+externalPort = 80
+
+[agent]
+expertMode = true
+
+[userenv]
+
+[userenv.shared]
+NEXT_PUBLIC_TMDB_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3MmJhMTBjNDI5OTE0MTU3MzgwOGQyNzEwNGVkMThmYSIsInN1YiI6IjY0ZjVhNTUwMTIxOTdlMDBmZWE5MzdmMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.84b7vWpVEilAbly4RpS01E9tyirHdhSXjcpfmTczI3Q"
+NEXT_PUBLIC_GOOGLE_ANALYTICS_ID = "G-XXXXXXXXXX"
+NEXT_PUBLIC_SITE_NAME = "CINEPHILE - FREE MOVIES"
+NEXT_PUBLIC_TWITTER = "https://twitter.com/"
+NEXT_PUBLIC_FACEBOOK = "https://facebook.com/marjhuncutieee"
+NEXT_PUBLIC_INSTAGRAM = "https://instagram.com/"
+NEXT_PUBLIC_YOUTUBE = "https://youtube.com/"
+
+[workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Start application"
+
+[[workflows.workflow]]
+name = "Start application"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm run dev"
+waitForPort = 5000
+
+[workflows.workflow.metadata]
+outputType = "webview"

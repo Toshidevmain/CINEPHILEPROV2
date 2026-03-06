@@ -1,0 +1,4 @@
+{
+  "/(front)/page": "app/(front)/page.js",
+  "/(front)/home/page": "app/(front)/home/page.js"
+}
