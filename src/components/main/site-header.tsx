@@ -5,7 +5,7 @@ import MainNav from "@/components/navigation/main-nav";
 const SiteHeader = () => {
   return (
     // <header className="sticky top-0 z-50 border-b bg-background">
-    <header className="sticky top-0 z-50">
+    <header className="sticky top-0 z-50" suppressHydrationWarning>
       <MainNav items={siteConfig.mainNav} />
       {/* <MobileNav items={siteConfig.mainNav} className="md:hidden" /> */}
     </header>

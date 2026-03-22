@@ -40,13 +40,19 @@ export function MainNav({ items }: MainNavProps) {
   // search store
   const searchStore = useSearchStore();
   const [isScrolled, setIsScrolled] = React.useState(false);
+  const [isMounted, setIsMounted] = React.useState(false);
 
   React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  React.useEffect(() => {
+    if (!isMounted) return;
     window.addEventListener('popstate', handlePopstateEvent, false);
     return () => {
       window.removeEventListener('popstate', handlePopstateEvent, false);
     };
-  }, []);
+  }, [isMounted]);
 
   const handlePopstateEvent = () => {
     const pathname = window.location.pathname;
@@ -105,12 +111,13 @@ export function MainNav({ items }: MainNavProps) {
 
   // change background color on scroll
   React.useEffect(() => {
+    if (!isMounted) return;
     const changeBgColor = () => {
       window.scrollY > 0 ? setIsScrolled(true) : setIsScrolled(false);
     };
     window.addEventListener('scroll', changeBgColor);
     return () => window.removeEventListener('scroll', changeBgColor);
-  }, [isScrolled]);
+  }, [isMounted]);
 
   const handleChangeStatusOpen = (value: boolean): void => {
     searchStore.setOpen(value);

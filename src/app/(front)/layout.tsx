@@ -3,7 +3,7 @@ import SiteHeader from '@/components/main/site-header';
 
 const FrontLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen" suppressHydrationWarning>
       <SiteHeader />
       <main>{children}</main>
       <SiteFooter />
