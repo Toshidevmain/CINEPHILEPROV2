@@ -77,19 +77,20 @@ const Hero = ({ shows }: HeroProps) => {
           fill
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#141414] via-transparent to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#141414] via-transparent to-transparent" />
-        <div className="absolute bottom-[15%] left-[4%] z-10 w-full max-w-[600px]">
-          <h1 className="text-4xl font-bold text-white md:text-5xl lg:text-6xl">
+        <div className="absolute inset-0 bg-gradient-to-t from-[#141414] via-[#141414]/30 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#141414] via-[#141414]/10 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#141414]/60" />
+        <div className="absolute bottom-[15%] left-[4%] z-10 w-full max-w-[600px] animate-fade-in">
+          <h1 className="text-4xl font-bold text-white drop-shadow-lg md:text-5xl lg:text-6xl">
             {randomShow?.title ?? randomShow?.name}
           </h1>
-          <div className="mt-3 flex items-center gap-2 text-sm text-[#B3B3B3]">
-            <span className="text-green-500 font-semibold">
+          <div className="mt-3 flex items-center gap-3 text-sm">
+            <span className="rounded bg-green-500/20 px-2 py-0.5 text-green-400 font-semibold">
               {Math.round((randomShow?.vote_average ?? 0) * 10)}% Match
             </span>
-            <span>{randomShow?.release_date?.split('-')[0] ?? randomShow?.first_air_date?.split('-')[0] ?? ''}</span>
+            <span className="text-[#B3B3B3]">{randomShow?.release_date?.split('-')[0] ?? randomShow?.first_air_date?.split('-')[0] ?? ''}</span>
           </div>
-          <p className="mt-4 line-clamp-3 text-sm text-[#B3B3B3] md:text-base leading-relaxed">
+          <p className="mt-4 line-clamp-3 text-sm text-[#B3B3B3] md:text-base leading-relaxed drop-shadow">
             {randomShow?.overview ?? ''}
           </p>
           <div className="mt-6 flex items-center gap-3">
@@ -98,14 +99,14 @@ const Hero = ({ shows }: HeroProps) => {
               href={`/watch/${
                 randomShow.media_type === MediaType.MOVIE ? 'movie' : 'tv'
               }/${randomShow.id}`}>
-              <Button className="flex items-center gap-2 rounded bg-white px-8 py-2 text-black font-semibold hover:bg-white/80 transition">
+              <Button className="flex items-center gap-2 rounded bg-white px-8 py-2 text-black font-semibold hover:bg-white/80 transition-all hover:scale-105 active:scale-95">
                 <Icons.play className="h-5 w-5 fill-black" aria-hidden="true" />
                 Play
               </Button>
             </Link>
             <Button
               variant="outline"
-              className="flex items-center gap-2 rounded border border-white/40 bg-white/10 px-8 py-2 text-white font-semibold hover:bg-white/20 transition"
+              className="flex items-center gap-2 rounded border border-white/40 bg-white/10 px-8 py-2 text-white font-semibold hover:bg-white/20 transition-all hover:scale-105 active:scale-95"
               onClick={() => {
                 modalStore.setShow(randomShow);
                 modalStore.setOpen(true);

@@ -57,16 +57,20 @@ const ShowsContainer = ({ shows }: ShowsContainerProps) => {
   }
 
   return (
-    <div className="relative z-10 mt-0 space-y-2 pb-12">
+    <div className="relative z-10 mt-0 space-y-4 pb-16 animate-fade-in">
       {modalStore.open && <ShowModal />}
       {shows.map(
-        (item) =>
+        (item, index) =>
           item.visible && (
-            <ShowsCarousel
+            <div
               key={item.title}
-              title={item.title}
-              shows={item.shows ?? []}
-            />
+              className="animate-slide-up"
+              style={{ animationDelay: `${index * 100}ms`, animationFillMode: 'both' }}>
+              <ShowsCarousel
+                title={item.title}
+                shows={item.shows ?? []}
+              />
+            </div>
           ),
       )}
     </div>

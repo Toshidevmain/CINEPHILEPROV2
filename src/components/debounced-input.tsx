@@ -36,27 +36,24 @@ export function DebouncedInput({
   React.useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
-        void onChange('');
+        onChangeStatusOpen(false);
+        inputRef.current?.blur();
       }
       if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
-        if (!inputRef.current) return;
         e.preventDefault();
         onChangeStatusOpen(true);
-        inputRef.current.focus();
+        setTimeout(() => inputRef.current?.focus(), 50);
       }
     };
     window.addEventListener('keydown', handleKeyDown);
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, []);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [onChangeStatusOpen]);
 
   const debounceInput = React.useCallback(
     debounce((value) => {
-      const strValue = value as string;
-      void onChange(strValue);
+      void onChange(value as string);
     }, debounceTimeout),
-    [],
+    [onChange, debounceTimeout],
   );
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -64,38 +61,54 @@ export function DebouncedInput({
   };
 
   return (
-    <div className={cn('relative', containerClassName)}>
-      <Input
-        ref={inputRef}
-        id={id}
-        type="text"
-        placeholder="Titles, people, genres"
+    <div className={cn('relative flex items-center', containerClassName)}>
+      <div
         className={cn(
-          'h-8 rounded bg-[#141414] text-sm text-white transition-all duration-300',
+          'flex items-center overflow-hidden transition-all duration-300',
           open
-            ? 'w-48 border border-white/30 pl-9 pr-3'
-            : 'w-8 border-transparent bg-transparent pl-8',
-          className,
+            ? 'w-48 border border-white/30 rounded-lg bg-[#141414]'
+            : 'w-8 border-transparent',
         )}
-        defaultValue={value}
-        maxLength={maxLength}
-        onChange={handleChange}
-        {...props}
-      />
-      <Button
-        id="search-btn"
-        aria-label="Search"
-        variant="ghost"
-        className={cn(
-          'absolute left-0 top-1/2 h-8 w-8 -translate-y-1/2 rounded p-0 text-white hover:bg-transparent',
-        )}
-        onClick={() => {
-          if (!inputRef.current) return;
-          inputRef.current.focus();
-          onChangeStatusOpen(!open);
-        }}>
-        <Icons.search className="h-4 w-4" aria-hidden="true" />
-      </Button>
+      >
+        <Button
+          id="search-btn"
+          aria-label="Search"
+          variant="ghost"
+          className={cn(
+            'h-8 w-8 shrink-0 rounded p-0 text-white hover:bg-transparent',
+          )}
+          onClick={() => {
+            if (open) {
+              inputRef.current?.focus();
+            } else {
+              onChangeStatusOpen(true);
+              setTimeout(() => inputRef.current?.focus(), 50);
+            }
+          }}
+        >
+          <Icons.search className="h-4 w-4" aria-hidden="true" />
+        </Button>
+        <Input
+          ref={inputRef}
+          id={id}
+          type="text"
+          placeholder="Titles, people, genres"
+          className={cn(
+            'h-8 border-0 bg-transparent px-0 text-sm text-white placeholder:text-[#777] focus-visible:ring-0 focus-visible:ring-offset-0',
+            open ? 'w-[calc(100%-2rem)] pr-2' : 'w-0 p-0',
+            className,
+          )}
+          defaultValue={value}
+          maxLength={maxLength}
+          onChange={handleChange}
+          {...props}
+        />
+      </div>
+      {!open && (
+        <kbd className="pointer-events-none absolute -right-1 top-1/2 hidden -translate-y-1/2 items-center gap-1 rounded border border-white/10 bg-white/5 px-1.5 py-0.5 text-[10px] text-[#777] md:inline-flex">
+          <span className="text-xs">⌘</span>K
+        </kbd>
+      )}
     </div>
   );
 }

@@ -117,20 +117,22 @@ export function MainNav({ items }: MainNavProps) {
   return (
     <div
       className={cn(
-        'fixed left-0 right-0 top-0 z-50 flex h-16 items-center justify-between px-[4%] transition-colors duration-500',
-        isScrolled ? 'bg-[#141414]' : 'bg-gradient-to-b from-black/70 to-transparent',
+        'fixed left-0 right-0 top-0 z-50 flex h-16 items-center justify-between px-[4%] transition-all duration-500',
+        isScrolled
+          ? 'bg-[#141414] shadow-lg shadow-black/20'
+          : 'bg-gradient-to-b from-black/80 via-black/40 to-transparent',
       )}>
       <div className="flex items-center gap-8">
         <Link
           href="/"
-          className="flex items-center"
+          className="flex items-center group"
           onClick={() => handleChangeStatusOpen(false)}>
-          <span className="text-2xl font-bold text-netflix tracking-tight">
+          <span className="text-2xl font-bold text-netflix tracking-tight transition-transform duration-300 group-hover:scale-105">
             CINEPHILE
           </span>
         </Link>
         {items?.length ? (
-          <nav className="hidden items-center gap-5 md:flex">
+          <nav className="hidden items-center gap-6 md:flex">
             {items?.map(
               (item, index) =>
                 item.href && (
@@ -138,9 +140,9 @@ export function MainNav({ items }: MainNavProps) {
                     key={index}
                     href={item.href}
                     className={cn(
-                      'text-sm font-medium transition-colors',
+                      'text-sm font-medium transition-all duration-200 relative after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-0 after:bg-netflix after:transition-all after:duration-300 hover:after:w-full',
                       path === item.href
-                        ? 'text-white font-semibold'
+                        ? 'text-white font-semibold after:w-full'
                         : 'text-[#B3B3B3] hover:text-white',
                       item.disabled && 'cursor-not-allowed opacity-80',
                     )}
@@ -152,7 +154,7 @@ export function MainNav({ items }: MainNavProps) {
           </nav>
         ) : null}
       </div>
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-2">
         <DebouncedInput
           id="search-input"
           open={searchStore.isOpen}
@@ -165,14 +167,18 @@ export function MainNav({ items }: MainNavProps) {
           rel="noreferrer"
           target="_blank"
           href={siteConfig.links.github}
-          className={cn(path === '/' ? 'hidden md:flex' : 'hidden')}>
-          <Icons.gitHub className="h-5 w-5 text-[#B3B3B3] hover:text-white" />
+          className={cn(
+            'hidden md:flex',
+            path === '/' ? 'md:hidden' : 'md:flex',
+          )}>
+          <Icons.gitHub className="h-5 w-5 text-[#B3B3B3] hover:text-white transition-colors" />
         </Link>
         <ThemeToggle />
-        <div className="block md:hidden">
+        <div className="flex md:hidden">
           <Button
             variant="ghost"
-            className="px-1 text-white hover:bg-transparent"
+            size="icon"
+            className="text-white hover:bg-transparent"
             onClick={() => handleChangeStatusOpen(!searchStore.isOpen)}>
             <Icons.search className="h-5 w-5" />
           </Button>

@@ -47,7 +47,7 @@ const ShowsCarousel = ({ title, shows }: ShowsCarouselProps) => {
 
   return (
     <section aria-label={title} className="relative pl-[4%]">
-      <h2 className="text-lg font-semibold text-white md:text-xl lg:text-2xl mb-2">
+      <h2 className="text-lg font-semibold text-white md:text-xl lg:text-2xl mb-3">
         {title}
       </h2>
       <div className="relative group">
@@ -55,16 +55,19 @@ const ShowsCarousel = ({ title, shows }: ShowsCarouselProps) => {
           aria-label="Scroll left"
           variant="ghost"
           className={cn(
-            'absolute left-0 top-0 z-10 h-full w-12 items-center justify-center rounded-none bg-black/50 opacity-0 transition-opacity hover:bg-black/70 group-hover:opacity-100',
+            'absolute left-0 top-0 z-10 h-full w-12 items-center justify-center rounded-none bg-black/60 opacity-0 transition-all duration-300 hover:bg-black/80 group-hover:opacity-100',
             showLeftArrow ? 'flex' : 'hidden',
-          )}
-          onClick={() => scrollToDirection('left')}>
-          <Icons.chevronLeft className="h-8 w-8 text-white" aria-hidden="true" />
+          )}>
+          <Icons.chevronLeft
+            className="h-8 w-8 text-white drop-shadow"
+            aria-hidden="true"
+            onClick={() => scrollToDirection('left')}
+          />
         </Button>
         <div
           ref={showsRef}
           onScroll={checkScroll}
-          className="no-scrollbar flex gap-1 overflow-x-auto overflow-y-hidden pb-1"
+          className="scrollbar-thin flex gap-1.5 overflow-x-auto overflow-y-hidden pb-2"
           style={{ scrollBehavior: 'smooth' }}>
           {shows.map((show) => (
             <ShowCard key={show.id} show={show} pathname={pathname} />
@@ -74,11 +77,11 @@ const ShowsCarousel = ({ title, shows }: ShowsCarouselProps) => {
           aria-label="Scroll right"
           variant="ghost"
           className={cn(
-            'absolute right-0 top-0 z-10 h-full w-12 items-center justify-center rounded-none bg-black/50 opacity-0 transition-opacity hover:bg-black/70 group-hover:opacity-100',
+            'absolute right-0 top-0 z-10 h-full w-12 items-center justify-center rounded-none bg-black/60 opacity-0 transition-all duration-300 hover:bg-black/80 group-hover:opacity-100',
             showRightArrow ? 'flex' : 'hidden',
           )}
           onClick={() => scrollToDirection('right')}>
-          <Icons.chevronRight className="h-8 w-8 text-white" aria-hidden="true" />
+          <Icons.chevronRight className="h-8 w-8 text-white drop-shadow" aria-hidden="true" />
         </Button>
       </div>
     </section>
@@ -102,7 +105,7 @@ export const ShowCard = ({
 
   return (
     <div
-      className="relative flex-shrink-0 w-[150px] sm:w-[170px] md:w-[190px] lg:w-[210px] cursor-pointer rounded overflow-hidden transition-transform duration-300 hover:scale-110 hover:z-20"
+      className="relative flex-shrink-0 w-[150px] sm:w-[170px] md:w-[190px] lg:w-[210px] cursor-pointer rounded overflow-hidden transition-all duration-300 hover:scale-110 hover:z-20 hover:shadow-xl hover:shadow-black/50 card-hover group/card"
       onClick={() => {
         const name = getNameFromShow(show);
         const path: string =
@@ -118,7 +121,7 @@ export const ShowCard = ({
           play: true,
         });
       }}>
-      <div className="aspect-[2/3] w-full">
+      <div className="aspect-[2/3] w-full relative">
         <img
           src={
             show.poster_path ?? show.backdrop_path
@@ -128,10 +131,11 @@ export const ShowCard = ({
               : '/images/grey-thumbnail.jpg'
           }
           alt={show.title ?? show.name ?? 'poster'}
-          className="h-full w-full object-cover"
+          className="h-full w-full object-cover transition-transform duration-500 group-hover/card:scale-110"
           loading="lazy"
           onError={imageOnErrorHandler}
         />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-300" />
       </div>
     </div>
   );

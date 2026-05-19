@@ -10,7 +10,7 @@ export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
   name: env.NEXT_PUBLIC_SITE_NAME,
-  author: env.NEXT_PUBLIC_SITE_NAME,
+  author: 'Marjhun O. Baylon',
   slogan: 'Watch TV Shows & Movies Online.',
   description:
     'Watch movies & TV shows online or stream right to your smart TV, game console, PC, Mac, mobile, tablet and more.',
@@ -34,7 +34,7 @@ export const siteConfig = {
   url: env.NEXT_PUBLIC_APP_URL,
   ogImage: `${env.NEXT_PUBLIC_APP_URL}/images/hero.jpg`,
   links: {
-    twitter: `${env.NEXT_PUBLIC_TWITTER}`,
+    marjhunf: `${env.NEXT_PUBLIC_MARJHUNF}`,
     github: 'https://github.com/ZCODES21',
     githubAccount: '',
   },
@@ -50,9 +50,9 @@ export const siteConfig = {
       icon: Icons.instagram,
     },
     {
-      title: 'Twitter',
-      href: `${env.NEXT_PUBLIC_TWITTER}`,
-      icon: Icons.twitter,
+      title: 'Marjhunf',
+      href: `${env.NEXT_PUBLIC_MARJHUNF}`,
+      icon: Icons.marjhunf,
     },
     {
       title: 'Youtube',

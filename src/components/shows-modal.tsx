@@ -148,7 +148,7 @@ const ShowModal = () => {
       open={modalStore.open}
       onOpenChange={handleCloseModal}
       aria-label="Modal containing show's details">
-      <DialogContent className="w-full max-w-4xl overflow-hidden rounded-md bg-[#181818] p-0 text-left shadow-xl animate-scale-in">
+      <DialogContent className="w-full max-w-4xl overflow-hidden rounded-lg bg-[#181818] p-0 text-left shadow-2xl shadow-black/50 animate-scale-in border border-white/10">
         <div className="relative aspect-video w-full bg-black">
           <Image
             fill

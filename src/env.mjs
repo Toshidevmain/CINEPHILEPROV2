@@ -5,7 +5,7 @@ export const env = {
     'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3MmJhMTBjNDI5OTE0MTU3MzgwOGQyNzEwNGVkMThmYSIsInN1YiI6IjY0ZjVhNTUwMTIxOTdlMDBmZWE5MzdmMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.84b7vWpVEilAbly4RpS01E9tyirHdhSXjcpfmTczI3Q',
   NEXT_PUBLIC_GOOGLE_ANALYTICS_ID: '',
   NEXT_PUBLIC_SITE_NAME: 'CINEPHILE - FREE MOVIES',
-  NEXT_PUBLIC_TWITTER: 'https://twitter.com/',
+  NEXT_PUBLIC_MARJHUNF: 'https://marjhunf.vercel.app',
   NEXT_PUBLIC_FACEBOOK: 'https://facebook.com/',
   NEXT_PUBLIC_INSTAGRAM: 'https://instagram.com/',
   NEXT_PUBLIC_YOUTUBE: 'https://youtube.com/',

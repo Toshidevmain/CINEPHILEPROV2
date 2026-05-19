@@ -62,7 +62,6 @@ export const metadata: Metadata = {
   icons: {
     icon: '/favicon.ico',
   },
-  other: { referrer: 'no-referrer-when-downgrade' },
 };
 
 export default function RootLayout({

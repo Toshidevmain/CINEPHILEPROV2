@@ -38,9 +38,14 @@ const ShowsGrid = ({ shows, query }: SearchedShowsProps) => {
             </div>
           </div>
         ) : (
-          <div className="grid grid-cols-2 gap-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
-            {shows.map((show: Show) => (
-              <ShowCard key={show.id} show={show} pathname={pathname} />
+          <div className="grid grid-cols-2 gap-1.5 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
+            {shows.map((show: Show, index: number) => (
+              <div
+                key={show.id}
+                className="animate-fade-in"
+                style={{ animationDelay: `${index * 30}ms`, animationFillMode: 'both' }}>
+                <ShowCard show={show} pathname={pathname} />
+              </div>
             ))}
           </div>
         )}
