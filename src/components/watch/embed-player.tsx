@@ -5,44 +5,39 @@ interface EmbedPlayerProps {
   url: string;
 }
 
-function EmbedPlayer(props: EmbedPlayerProps) {
+function EmbedPlayer({ url }: EmbedPlayerProps) {
+  const ref = React.useRef<HTMLIFrameElement>(null);
+  const [loaded, setLoaded] = React.useState(false);
+
   React.useEffect(() => {
     if (ref.current) {
-      ref.current.src = props.url;
+      ref.current.src = url;
     }
+  }, [url]);
 
-    const iframe: HTMLIFrameElement | null = ref.current;
-    iframe?.addEventListener('load', handleIframeLoaded);
-    return () => {
-      iframe?.removeEventListener('load', handleIframeLoaded);
-    };
-  }, []);
-
-  const ref = React.useRef<HTMLIFrameElement>(null);
-
-  const handleIframeLoaded = () => {
-    if (!ref.current) {
-      return;
+  const handleIframeLoad = () => {
+    setLoaded(true);
+    if (ref.current) {
+      ref.current.style.opacity = '1';
     }
-    const iframe: HTMLIFrameElement = ref.current;
-    if (iframe) iframe.style.opacity = '1';
   };
 
   return (
-    <div
-      style={{
-        width: '100%',
-        height: '100%',
-        position: 'absolute',
-        backgroundColor: '#000',
-      }}>
+    <div className="relative h-full w-full">
+      {!loaded && (
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="h-8 w-8 animate-spin rounded-full border-2 border-white/20 border-t-white" />
+        </div>
+      )}
       <iframe
         ref={ref}
         width="100%"
         height="100%"
         allowFullScreen
-        style={{ opacity: 0 }}
+        style={{ opacity: 0, transition: 'opacity 0.5s ease' }}
         referrerPolicy="no-referrer-when-downgrade"
+        onLoad={handleIframeLoad}
+        title="Video player"
       />
     </div>
   );

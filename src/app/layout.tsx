@@ -2,8 +2,7 @@ import { TailwindIndicator } from '@/components/tailwind-indicator';
 import { ThemeProvider } from '@/components/theme-provider';
 import { cn } from '@/lib/utils';
 import '@/styles/globals.css';
-// import { TrpcProvider } from '@/client/trpc-provider';
-import type { Metadata, Viewport } from 'next';
+import type { Metadata } from 'next';
 import { Inter as FontSans } from 'next/font/google';
 import localFont from 'next/font/local';
 import { Analytics } from '@/components/analytics';
@@ -25,14 +24,11 @@ const fontHeading = localFont({
   variable: '--font-heading',
 });
 
-export const viewport: Viewport = {
+export const metadata: Metadata = {
   themeColor: [
     { media: '(prefers-color-scheme: light)', color: 'white' },
     { media: '(prefers-color-scheme: dark)', color: 'black' },
   ],
-};
-
-export const metadata: Metadata = {
   metadataBase: new URL(env.NEXT_PUBLIC_APP_URL),
   title: {
     default: siteConfig.name,
@@ -75,24 +71,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
-          'overlflow-y-auto min-h-screen overflow-x-hidden bg-background font-sans antialiased',
+          'min-h-screen overflow-x-hidden bg-[#141414] font-sans antialiased',
           fontSans.variable,
           fontHeading.variable,
         )}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
-          enableSystem
+          defaultTheme="dark"
+          enableSystem={false}
           disableTransitionOnChange>
-          {/* <TrpcProvider> */}
           {children}
           <TailwindIndicator />
           <Analytics />
           <SpeedInsights />
-          {/* </TrpcProvider> */}
           {env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID && (
             <>
               <Script

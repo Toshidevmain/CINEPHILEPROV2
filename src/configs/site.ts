@@ -60,20 +60,7 @@ export const siteConfig = {
       icon: Icons.youtube,
     },
   ],
-  footerItems: [
-    //{ title: 'Audio Description', href: '/' },
-    //{ title: 'Help Center', href: '/' },
-    //{ title: 'Gift Cards', href: '/' },
-    //{ title: 'Media Center', href: '/' },
-    //{ title: 'Investor Relations', href: '/' },
-    //{ title: 'Jobs', href: '/' },
-    //{ title: 'Terms of Use', href: '/terms-of-use' },
-    //{ title: 'Privacy', href: '/' },
-    //{ title: 'Legal Notices', href: '/' },
-    //{ title: 'Cookie Preferences', href: '/' },
-    //{ title: 'Corporate Information', href: '/' },
-    //{ title: 'Contact Us', href: '/' },
-  ],
+  footerItems: [] as { title: string; href: string }[],
   mainNav: [
     {
       title: 'Home',
@@ -100,10 +87,5 @@ export const siteConfig = {
     //   href: "/my-list",
     //   // icon: Icons.list,
     // },
-    {
-      title: 'Notifications',
-      // onClick: () => alert("🛹 Do a kickflip"),
-      // icon: Icons.bell,
-    },
   ],
 };

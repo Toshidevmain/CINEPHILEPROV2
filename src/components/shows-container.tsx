@@ -1,18 +1,13 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-// import { useMounted } from '@/hooks/use-mounted';
-// import { useModalStore } from "@/stores/modal"
-// import { useProfileStore } from "@/stores/profile"
 import { useSearchStore } from '@/stores/search';
 import type { CategorizedShows } from '@/types';
 
-// import { api } from "@/lib/api/api"
 import { getIdFromSlug } from '@/lib/utils';
 import ShowModal from '@/components/shows-modal';
 import ShowsCarousel from '@/components/shows-carousel';
 import ShowsGrid from '@/components/shows-grid';
-// import ShowsSkeleton from '@/components/shows-skeleton';
 import { useModalStore } from '@/stores/modal';
 import React from 'react';
 import { type Show } from '@/types/index';
@@ -25,10 +20,8 @@ interface ShowsContainerProps {
 }
 
 const ShowsContainer = ({ shows }: ShowsContainerProps) => {
-  // const mounted = useMounted();
   const pathname = usePathname();
 
-  // stores
   const modalStore = useModalStore();
   const searchStore = useSearchStore();
 
@@ -59,20 +52,12 @@ const ShowsContainer = ({ shows }: ShowsContainerProps) => {
     } catch (error) {}
   };
 
-  // if (!mounted) {
-  //   return (
-  //     <div className="mt-4 min-h-[800px] pt-[5%]">
-  //       <ShowsSkeleton />
-  //     </div>
-  //   );
-  // }
-
   if (searchStore.query.length > 0) {
     return <ShowsGrid shows={searchStore.shows} query={searchStore.query} />;
   }
 
   return (
-    <>
+    <div className="relative z-10 mt-0 space-y-2 pb-12">
       {modalStore.open && <ShowModal />}
       {shows.map(
         (item) =>
@@ -84,7 +69,7 @@ const ShowsContainer = ({ shows }: ShowsContainerProps) => {
             />
           ),
       )}
-    </>
+    </div>
   );
 };
 

@@ -6,72 +6,51 @@ import { Icons } from "@/components/icons";
 
 const SiteFooter = () => {
   return (
-    <footer aria-label="Footer" className="w-full">
-      <div className="container grid w-full max-w-6xl gap-7 py-10">
-        <div className="flex flex-wrap items-center gap-2">
+    <footer aria-label="Footer" className="w-full bg-[#141414] pt-12 pb-8">
+      <div className="mx-auto max-w-6xl px-[4%]">
+        <div className="flex items-center gap-4 mb-8">
           {siteConfig.socialLinks.map(
             (item, i) =>
               item.href && (
                 <Link key={i} href={item.href} target="_blank" rel="noreferrer">
-                  <div
-                    className={buttonVariants({
-                      size: "sm",
-                      variant: "ghost",
-                      className:
-                        // "rounded-none text-neutral-700 hover:bg-transparent dark:text-neutral-50 dark:hover:bg-transparent",
-                        "rounded-none hover:bg-transparent",
-                    })}
-                  >
-                    {item.icon && <item.icon className="h-6 w-6" />}
+                  <div className="flex h-8 w-8 items-center justify-center rounded-full text-[#777] hover:text-white transition-colors">
+                    {item.icon && <item.icon className="h-5 w-5" />}
                     <span className="sr-only">{item.title}</span>
                   </div>
                 </Link>
               ),
           )}
         </div>
-        <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
-          {siteConfig.footerItems.map(
-            (item, i) =>
-              item.href && (
-                <li
-                  key={i}
-                  className="text-xs text-foreground/60 hover:underline sm:text-sm"
-                >
-                  <Link href={item.href}>{item.title}</Link>
-                </li>
-              ),
-          )}
-        </ul>
-        <p className="text-xs text-foreground/60 sm:text-sm">
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+          {[
+            { title: 'Audio Description', href: '/' },
+            { title: 'Help Center', href: '/' },
+            { title: 'Gift Cards', href: '/' },
+            { title: 'Media Center', href: '/' },
+            { title: 'Investor Relations', href: '/' },
+            { title: 'Jobs', href: '/' },
+            { title: 'Terms of Use', href: '/terms-of-use' },
+            { title: 'Privacy', href: '/' },
+            { title: 'Legal Notices', href: '/' },
+            { title: 'Cookie Preferences', href: '/' },
+            { title: 'Corporate Information', href: '/' },
+            { title: 'Contact Us', href: '/' },
+          ].map((item, i) => (
+            <Link
+              key={i}
+              href={item.href}
+              className="text-sm text-[#777] hover:text-white transition-colors">
+              {item.title}
+            </Link>
+          ))}
+        </div>
+        <p className="mt-8 text-xs text-[#555]">
           Developed by Marjhun Baylon | All Rights Reserved | {new Date().getFullYear()} {siteConfig.author}
         </p>
-      </div>
-      {/* <div className="container flex flex-col items-center justify-between md:h-24 md:flex-row md:py-0 gap-4"> */}
-      <div className="container flex h-24 items-center gap-2 px-8">
-        <Icons.play className="hidden h-6 w-6 md:block" />
-        <p className="text-center text-xs leading-loose sm:text-sm md:text-left">
-            CinePhile does not host any files, it only links to 3rd party services. Legal issues should be taken up with the file hosts and providers. CinePhile is not responsible for any media files shown by the video providers.
-          <a
-            href={siteConfig.links.twitter}
-            target="_blank"
-            rel="noreferrer"
-            className="font-medium underline underline-offset-4"
-          >
-            
-          </a>
-          
-          <a
-            href={siteConfig.links.github}
-            target="_blank"
-            rel="noreferrer"
-            className="font-medium underline underline-offset-4"
-          >
-            
-          </a>
-          
+        <p className="mt-2 text-xs text-[#555] leading-relaxed">
+          CinePhile does not host any files, it only links to 3rd party services. Legal issues should be taken up with the file hosts and providers. CinePhile is not responsible for any media files shown by the video providers.
         </p>
       </div>
-      {/* </div> */}
     </footer>
   );
 };
